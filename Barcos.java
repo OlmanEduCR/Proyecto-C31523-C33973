@@ -1,41 +1,29 @@
 public class Barcos{
     //Atributos
-    private char barcoGrande;
-    private char barcoMediano;
-    private char barcoPequeño;
-    private String jugadorBatallaNaval1;
-    private String jugadorBatallaNaval2;
+    private char barco1;
+    private char barco2;
+    private char barco3;
     private boolean estado;
 
     //Método Construtor
-    public Barcos(char barcoGrande, char barcoMediano, char barcoPequeño, String jugadorBatallaNaval1, String jugadorBatallaNaval2, boolean estado){
-        this.barcoGrande = barcoGrande;
-        this.barcoMediano = barcoMediano;
-        this.barcoPequeño = barcoPequeño;
-        this.jugadorBatallaNaval1 = jugadorBatallaNaval1;
-        this.jugadorBatallaNaval2 = jugadorBatallaNaval2;
+    public Barcos(char barco1, char barco2, char barco3, boolean estado){
+        this.barco1 = barco1;
+        this.barco2 = barco2;
+        this.barco3 = barco3;
         this.estado = estado;
     }
     
     //Setters 
-    public void setBarcoGrande(char barcoGrandeP){
-        this.barcoGrande = barcoGrandeP;
+    public void setBarcoGrande(char barco1P){
+        this.barco1 = barco1P;
     }
 
-    public void setBarcoMediano(char barcoMedianoP){
-        this.barcoMediano = barcoMedianoP;
+    public void setBarcoMediano(char barco2P){
+        this.barco2 = barco2P;
     }
 
-    public void setBarcoPequeño(char barcoPequeñoP){
-        this.barcoPequeño = barcoPequeñoP;
-    }
-
-    public void setJugadorBatallaNaval1(String jugadorBatallaNaval1P){
-        this.jugadorBatallaNaval1 = jugadorBatallaNaval1P;
-    }
-
-    public void setJugadorBatallaNaval2(String jugadorBatallaNaval2P){
-        this.jugadorBatallaNaval2 = jugadorBatallaNaval2P;
+    public void setBarcoPequeño(char barco3P){
+        this.barco3 = barco3P;
     }
 
     public void setEstado(boolean estadop){
@@ -44,23 +32,15 @@ public class Barcos{
 
     //Getters
     public char getBarcoGrande(){
-        return this.barcoGrande;
+        return this.barco1;
     }
 
-    public char getBarcoMediano(){
-        return this.barcoMediano;
+    public char getBarco2(){
+        return this.barco2;
     }
 
-    public char getBarcoPequeño(){
-        return this.barcoPequeño;
-    }
-
-    public String getJugadorBatallaNaval1(){
-        return this.jugadorBatallaNaval1;
-    }
-
-    public String getJugadorBatallaNaval2(){
-        return this.jugadorBatallaNaval2;
+    public char getBarco3(){
+        return this.barco3;
     }
 
     public boolean getEstado(){
@@ -68,28 +48,27 @@ public class Barcos{
     }
 
     //Métodos
-    public boolean estadoDelBarcoGrande(){
+    public boolean estadoDelBarco1(){
         boolean estado = false;
-        if(barcoGrande != 0){
+        if(barco1 != 0){
             estado = true;
         }
         return estado;
     }
 
-    public boolean estadoDelBarcoMediano(){
+    public boolean estadoDelBarco2(){
         boolean estado = false;
-        if(barcoGrande != 0){
+        if(barco2 != 0){
             estado = true;
         }
         return estado;
     }
 
-    public boolean estadoDelBarcoPequeño(){
+    public boolean estadoDelBarco3(){
         boolean estado = false;
-        if(barcoGrande != 0){
+        if(barco3 != 0){
             estado = true;
         }
         return estado;
-    }
-    
+    }    
 }
