@@ -46,26 +46,26 @@ public class Ahorcado{
         return palabraJ2;
     }
 
-    public char getPalabraArrayJ1(){
+    public char[] getPalabraArrayJ1(){
         return palabraArrayJ1;
     }
-    public char getPalabraArrayJ2(){
+    public char[] getPalabraArrayJ2(){
         return palabraArrayJ2;
     }
 
-    public char getletrasPalabraJ1(){
+    public char[] getLetrasPalabraJ1(){
         return letrasPalabraJ1;
     }
     
-    public char getLetrasPalabraJ2(){
+    public char[] getLetrasPalabraJ2(){
         return letrasPalabraJ2;
     }
 
-    public boolean getVerificarPJ1(){
+    public boolean[] getVerificarPJ1(){
         return verificarPJ1;
     }
 
-    public boolean getVerificarPJ2(){
+    public boolean[] getVerificarPJ2(){
         return verificarPJ2;
     }
 
@@ -81,137 +81,141 @@ public class Ahorcado{
         return turno;
     }
 
-    public boolean getFinDelJuego{
-        return turno;
+    public boolean getFinDelJuego(){
+        return finDelJuego;
     }
 
     //Setters
-    public String setPalabra1(String palabraJ1) {
+    public void setPalabra1(String palabraJ1) {
         this.palabraJ1 = palabraJ1.toLowerCase(); //toLowerCase pasa las mayusculas a minisculas y minisculas no les hace nada
     }
 
-    public String setPalabra2(String palabraJ2) {
+    public void setPalabra2(String palabraJ2) {
         this.palabraJ2 = palabraJ2.toLowerCase(); //toLowerCase pasa las mayusculas a minisculas y minisculas no les hace nada
     }
 
-    public char setPalabraArrayJ1(char palabraArrayJ1) {
+    public void setPalabraArrayJ1(char[] palabraArrayJ1) {
         this.palabraArrayJ1 = palabraArrayJ1;    
     }
 
-    public char setPalabraArrayJ2(char palabraArrayJ2) {
+    public void setPalabraArrayJ2(char[] palabraArrayJ2) {
         this.palabraArrayJ2 = palabraArrayJ2;    
     }
 
-    public char setLetrasPalabraJ1(char[] letrasPalabraJ1) {
+    public void setLetrasPalabraJ1(char[] letrasPalabraJ1) {
         this.letrasPalabraJ1 = letrasPalabraJ1;
     }
 
-    public char setLetrasPalabraJ2(char[] letrasPalabraJ2) {
-        this.letrasPalabraJ1 = letrasPalabraJ2;
+    public void setLetrasPalabraJ2(char[] letrasPalabraJ2) {
+        this.letrasPalabraJ2 = letrasPalabraJ2;
     }
 
-    public boolean setVerificarPJ1(boolean[] verificarPJ1) {
+    public void setVerificarPJ1(boolean[] verificarPJ1) {
         this.verificarPJ1 = verificarPJ1;
     }
     
-    public boolean setVerificarPJ2(boolean[] verificarPJ2) {
+    public void setVerificarPJ2(boolean[] verificarPJ2) {
         this.verificarPJ2 = verificarPJ2;
     }
     
-    public int setIntentos1(int intentos1){
+    public void setIntentos1(int intentos1){
         this.intentos1 = intentos1;
     }
 
-    public int setIntentos2(int intentos2){
+    public void setIntentos2(int intentos2){
         this.intentos2 = intentos2;
     }
 
-    public int setTurno(int turno) {
+    public void setTurno(int turno) {
         this.turno = turno;
     }
 
-    public boolean setFinDelJuego(boolean finDelJuego) {
+    public void setFinDelJuego(boolean finDelJuego) {
         this.finDelJuego = finDelJuego;
     }
 
-    //metodo intento 
+    //metodos 
 
-    public boolean verificarLetraPalabraJ1(char letra) {
-        letra = Character.toLowerCase(letras);
+    public String verificarLetra(int jugador, char letra) {
+        letra = Character.toLowerCase(letra);    
         if(!Character.isLetter(letra)){
             return "Ingrese una letra valida";
         }
+        char[] palabraArray;
+        char[] letrasPalabra;
+        boolean[]verificarP;
+        int intentos;
+
+        if(jugador == 1 ) {
+            palabraArray = palabraArrayJ1;
+            letrasPalabra = letrasPalabraJ1;
+            verificarP = verificarPJ1;
+            intentos = intentos1;
+        } else {
+            palabraArray = palabraArrayJ2;
+            letrasPalabra = letrasPalabraJ2;
+            verificarP = verificarPJ2;
+            intentos = getIntentos2;
+        }
+        //verificar la letra que se encotro esta o no esta en el array
         boolean letraEncontrada = false;
-        for(int i = 0; i< palabraJ1.length(); i++){
-            if (!verificarPJ1[i]){
-                letrasPalabraJ1[i] = letra;
-                verificarPJ1[i] = true;
+        for(int i = 0; i< palabraArray.length(); i++){
+            if (palabraArray[i] == letra && !verificarP[i]) {
+                letrasPalabra[i] = letra;
+                verificarP[i] = true;
                 letraEntrada = true ;
             }
         }
     }
-
+    //si la letra no esta, resta uno a la cantidad de intentos 
     if(!letraEncontrada){
-        intentos1--;
-        if (intentos1 <= 0){
-            finDelJuego = true;
-            return "cantidad de intentos agotados, has perdido";
-        } else{
-            return "letra incorrecta tienes " + intentos1 + "intentos"; 
-        }
+        if (jugador == 1){
+            intentos1--;
+            if (intentos1 <= 0){
+                finDelJuego = true;
+                return "Te quedaste sin intentos";
+            }
+            return "Letra incorrecta te quedan" + intentos1 + "intentos";
+        } else { 
+            intentos2--;
+            if(intentos2<= 0) {
+                finDelJuego =  true;
+                return "Te quedaste sin intentos";
+            }
+            return "Letra incorrecta te quedan" + intentos2 + "intentos";
 
+        }
     } else {
-        boollean gano = true;
-        for(boolean b : verificarPJ1) {
-            if (!b){
+        boolean gano = true;
+        for(boolean b : verificarP) {
+            if(!b) {
                 gano = false;
                 break;
-          }
-        }
-        if (gano) {
+            }
+        } 
+        if (gano){
             finDelJuego = true;
-            return "Felicidades adivino la palabra"
+            return "Felicitaciones acerto la palabra";
         }
-        return "letra correcta"
+        return "Letra correcta";
+
     }
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    //metodo, contador\intento
-    //este  metodo se usara para tomar el char letra que se le solicita al jugar, se toma la letra en este caso y verifica si la letra que se ingreso esta en el array de la palabra que ingreso al principio o sea la palabraJ1 y si da falso ya que ninguna entrada del array es igual empieza a bajar al contador que inicia en 6 y si es verdades cambia la entrada que corresponde a la letra que se hace 
-
-
-
-
-    //metodo para verificar que todabia queden intentos o finalizar el juego
-    //metodo, para imprimer la palabra y tipo (intentos, palabra,muñeco(switch por nummeri de intentos))
-
-
-
-
-
-
-
-
-
-
+//Mostar los aciertos de la en las palabras dadas
+    public String avanceEnLaPalabra{
+        char[] letras;
+        if(jugaror == 1) {
+            letras = letrasPalabraJ1;
+        }else{
+            letras = letrasPalabraJ2;
+        }
+        return new String(letras);
+    }
+    //cambio de turnos
+    public void cambiarTurno() {
+        if(turno == 1) {
+            turno = 2;
+        } else {
+            turno = 1;
+        }
+    }
 }
-
-
-
-
-
-
-
