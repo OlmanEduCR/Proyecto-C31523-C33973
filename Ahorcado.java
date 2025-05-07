@@ -22,6 +22,7 @@ public class Ahorcado{
     this.palabraArrayJ2 = palabra2.toLowerCase().toCharArray();
     this.letrasPalabraJ1 = new char[palabra1.length()];
     this.letrasPalabraJ2 = new char[palabra2.length()];
+    
     //llenar el array con el signo * para empezar
     for(int i = 0; i < letrasPalabraJ1.length; i++ ){
         letrasPalabraJ1[i] = '*';
@@ -150,72 +151,73 @@ public class Ahorcado{
             palabraArray = palabraArrayJ1;
             letrasPalabra = letrasPalabraJ1;
             verificarP = verificarPJ1;
-            intentos = intentos1;
         } else {
             palabraArray = palabraArrayJ2;
             letrasPalabra = letrasPalabraJ2;
             verificarP = verificarPJ2;
-            intentos = getIntentos2;
         }
         //verificar la letra que se encotro esta o no esta en el array
         boolean letraEncontrada = false;
-        for(int i = 0; i< palabraArray.length(); i++){
+
+        for(int i = 0; i< palabraArray.length; i++){
             if (palabraArray[i] == letra && !verificarP[i]) {
                 letrasPalabra[i] = letra;
                 verificarP[i] = true;
-                letraEntrada = true ;
+                letraEncontrada = true ;
             }
         }
-    }
-    //si la letra no esta, resta uno a la cantidad de intentos 
-    if(!letraEncontrada){
-        if (jugador == 1){
-            intentos1--;
-            if (intentos1 <= 0){
+        //si la letra no esta, resta uno a la cantidad de intentos 
+        if(!letraEncontrada){
+            if (jugador == 1){
+                intentos1--;
+                if (intentos1 <= 0){
+                    finDelJuego = true;
+                    return "Te quedaste sin intentos";
+                }
+                return "Letra incorrecta te quedan " + intentos1 + " intentos";
+            } else { 
+                intentos2--;
+                if(intentos2<= 0) {
+    
+                    finDelJuego =  true;
+                    return "Te quedaste sin intentos";
+                }
+                return "Letra incorrecta te quedan " + intentos2 + " intentos";
+            }
+        } else {
+            boolean gano = true;
+            for(boolean b : verificarP) {
+                if(!b) {
+                    gano = false;
+                    break;
+                }
+            } 
+            if (gano){
                 finDelJuego = true;
-                return "Te quedaste sin intentos";
+                return "Felicitaciones acerto la palabra";
             }
-            return "Letra incorrecta te quedan" + intentos1 + "intentos";
-        } else { 
-            intentos2--;
-            if(intentos2<= 0) {
-                finDelJuego =  true;
-                return "Te quedaste sin intentos";
-            }
-            return "Letra incorrecta te quedan" + intentos2 + "intentos";
-
+            return "Letra correcta";
         }
-    } else {
-        boolean gano = true;
-        for(boolean b : verificarP) {
-            if(!b) {
-                gano = false;
-                break;
-            }
-        } 
-        if (gano){
-            finDelJuego = true;
-            return "Felicitaciones acerto la palabra";
-        }
-        return "Letra correcta";
-
     }
-//Mostar los aciertos de la en las palabras dadas
-    public String avanceEnLaPalabra{
+
+    //Mostar los aciertos de la en las palabras dadas
+    
+    public String avanceEnLaPalabra(int jugador) {
         char[] letras;
-        if(jugaror == 1) {
+        if(jugador == 1) {
             letras = letrasPalabraJ1;
         }else{
             letras = letrasPalabraJ2;
         }
         return new String(letras);
     }
-    //cambio de turnos
-    public void cambiarTurno() {
-        if(turno == 1) {
-            turno = 2;
-        } else {
-            turno = 1;
+        //cambio de turnos
+        public void cambiarTurno() {
+            if(turno == 1) {
+                turno = 2;
+            } else {
+                turno = 1;
+            }
         }
+
     }
-}
