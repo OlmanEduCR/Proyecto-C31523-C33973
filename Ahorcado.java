@@ -219,5 +219,16 @@ public class Ahorcado{
                 turno = 1;
             }
         }
+    
 
     }
+
+
+
+
+
+
+
+
+
+
