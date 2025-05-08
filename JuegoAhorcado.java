@@ -85,19 +85,15 @@ public class JuegoAhorcado {
     //metodo juego
     public static void juego() {
         System.out.println("bienvenido al juego de ahorcado ");
+       
         //solicitar las palabras 
-        
-        System.out.println("Juegador 1, ingrese la palabra secreta de 6 letras");
-        String palabra1 = scanner.nextLine().trim(); //El trim se usa para eliminar espacios blanco y evitar problemas 
-        System.out.println();
-        //como ban a jugar dos al mismo tiempo vamos a limpiar lo que sale en la pantalla
-        for(int i = 0; i < 50; System.out.println());
+        String palabra1 = solicitarPalabra(1);
+        for(int i = 0; i < 30; i++) System.out.println(); //impreme 30 lienas en blanco
 
-        System.out.println("Juegador 2, ingrese la palabra secreta de 6 letras");
-        String palabra2 = scanner.nextLine().trim(); //El trim se usa para eliminar espacios blanco y evitar problemas 
-        System.out.println();
-        //como ban a jugar dos al mismo tiempo vamos a limpiar lo que sale en la pantalla
-        for(int i = 0; i < 50; System.out.println());
+        String palabra2 = solicitarPalabra(2);
+        for(int i = 0; i < 30; i++) System.out.println();
+      
+
 
 
         Ahorcado juego = new Ahorcado(palabra1, palabra2);
@@ -108,7 +104,7 @@ public class JuegoAhorcado {
                 System.out.println("Ingresar letra ");
                 String entrada = scanner.nextLine();
                 //si la persona ingresa verias letras puede causar problemas enotnces para evitar eso usamos lo siguiente
-                if(entrada.length() != 1) {
+                if(entrada.length() != 1|| !entrada.matches("[a-z]")) {
                     System.out.println("Ingrese solo una letra");
                     continue;
                 }
@@ -117,15 +113,21 @@ public class JuegoAhorcado {
                 System.out.println(resultado);
                 
                 int intentosRestantes;
+                
                 if(turnoActual == 1) {
                     intentosRestantes = juego.getIntentos1();
                 } else {
                     intentosRestantes = juego.getIntentos2();
                 }
                 String mensaje = "Fallaste, te queda " + intentosRestantes + "intentos";
-                if(resultado.equals(mensaje)) {
+                
+                System.out.println(dibujarMu(6 - intentosRestantes));
+                
+
+                if (resultado.toLowerCase().contains("incorrecta")) {
                     juego.cambiarTurno();
                 }
+                
                 if (juego.getFinDelJuego()){
                     System.out.println("Juego terminado");
                     System.out.println("Avance final del jugador" + turnoActual + juego.avanceEnLaPalabra(turnoActual));
