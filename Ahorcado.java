@@ -32,7 +32,6 @@ public class Ahorcado{
     }
     this.verificarPJ1 = new boolean[palabra1.length()];
     this.verificarPJ2 = new boolean[palabra2.length()];
-    //llenar el array con valores en falso para empezar a verificar la palabra
     this.intentos1 = 6;
     this.intentos2 = 6;
     this.turno = 1;
@@ -142,10 +141,10 @@ public class Ahorcado{
         if(!Character.isLetter(letra)){
             return "Ingrese una letra valida";
         }
+
         char[] palabraArray;
         char[] letrasPalabra;
         boolean[]verificarP;
-        int intentos;
 
         if(jugador == 1 ) {
             palabraArray = palabraArrayJ1;
@@ -156,8 +155,8 @@ public class Ahorcado{
             letrasPalabra = letrasPalabraJ2;
             verificarP = verificarPJ2;
         }
-        //verificar la letra que se encotro esta o no esta en el array
-        boolean letraEncontrada = false;
+
+        boolean letraEncontrada = false; //verificar la letra que se encotro esta o no esta en el array
 
         for(int i = 0; i< palabraArray.length; i++){
             if (palabraArray[i] == letra && !verificarP[i]) {
@@ -166,8 +165,8 @@ public class Ahorcado{
                 letraEncontrada = true ;
             }
         }
-        //si la letra no esta, resta uno a la cantidad de intentos 
-        if(!letraEncontrada){
+       
+        if(!letraEncontrada){ //si la letra no esta, resta uno a la cantidad de intentos 
             if (jugador == 1){
                 intentos1--;
                 if (intentos1 <= 0){
@@ -199,10 +198,8 @@ public class Ahorcado{
             return "Letra correcta";
         }
     }
-
-    //Mostar los aciertos de la en las palabras dadas
     
-    public String avanceEnLaPalabra(int jugador) {
+    public String avanceEnLaPalabra(int jugador) {//Mostar los aciertos de la en las palabras dadas
         char[] letras;
         if(jugador == 1) {
             letras = letrasPalabraJ1;
@@ -219,8 +216,6 @@ public class Ahorcado{
                 turno = 1;
             }
         }
-    
-
     }
 
 

@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class JuegoAhorcado {
     private static Scanner scanner = new Scanner(System.in);
+    
     //metodos
     public static String dibujarMu(int intentosFallados){
         switch(intentosFallados) {
@@ -64,13 +65,26 @@ public class JuegoAhorcado {
             default:
                 return "Sin mas intentos ";
         }
+
+    }
+    //solicitar palabra 
+    private static String solicitarPalabra(int jugador){
+        String palabra;
+        while (true) {
+            System.out.println("Jugador " + jugador + " ingrese una palabra de 6 letras ");
+            palabra = scanner.nextLine().trim().toLowerCase(); //
+            if(palabra.length() == 6 && palabra.matches("[a-z]+")) {
+                break;
+            } else {
+                System.out.println("Palabra incorrecta, debe de tener 6 letras");
+            }
+        }
+        return palabra;
     }
 
-    public static void juego(){
-        Scanner scanner = new Scanner(System.in);
+    //metodo juego
+    public static void juego() {
         System.out.println("bienvenido al juego de ahorcado ");
-
-
         //solicitar las palabras 
         
         System.out.println("Juegador 1, ingrese la palabra secreta de 6 letras");
@@ -88,9 +102,9 @@ public class JuegoAhorcado {
 
         Ahorcado juego = new Ahorcado(palabra1, palabra2);
             while (!juego.getFinDelJuego()) {
-                int turnoActual = ahorcado.getTurno();
+                int turnoActual = juego.getTurno();
                 System.out.println("Turno del jugador " + turnoActual);
-                System.out.println("Palabra " + ahorcado.avanceEnLaPalabra(turnoActual));
+                System.out.println("Palabra " + juego.avanceEnLaPalabra(turnoActual));
                 System.out.println("Ingresar letra ");
                 String entrada = scanner.nextLine();
                 //si la persona ingresa verias letras puede causar problemas enotnces para evitar eso usamos lo siguiente
@@ -99,47 +113,26 @@ public class JuegoAhorcado {
                     continue;
                 }
                 char letra = entrada.charAt(0);
-                String resultado = ahorcado.verificarLetra(turnoActual,letra);
+                String resultado = juego.verificarLetra(turnoActual,letra);
                 System.out.println(resultado);
                 
                 int intentosRestantes;
                 if(turnoActual == 1) {
-                    intentosRestantes = ahorcado.getIntentos1();
+                    intentosRestantes = juego.getIntentos1();
                 } else {
-                    intentosRestantes = ahorcado.getIntentos2();
+                    intentosRestantes = juego.getIntentos2();
                 }
                 String mensaje = "Fallaste, te queda " + intentosRestantes + "intentos";
                 if(resultado.equals(mensaje)) {
-                    ahorcado.cambiarTurno();
+                    juego.cambiarTurno();
                 }
-                if (ahorcado.getFinDelJuego()){
+                if (juego.getFinDelJuego()){
                     System.out.println("Juego terminado");
-                    System.out.println("Avance final del jugador" + turnoActual + ahorcado.avanceEnLaPalabra(turnoActual));
+                    System.out.println("Avance final del jugador" + turnoActual + juego.avanceEnLaPalabra(turnoActual));
                     break;
                 }
             }
         }
-        
-
-        
-
-
-
-
-
-
 
     } 
-    private String solicitarPalabra(int jugador){
-        String palabra;
-        while (true) {
-            System.out.println("Jugador " + jugador + " ingrese una palabra de 6 letras ");
-            palabra = scanner.nextLine().trim().toLowerCase();
-            if(palabra.length() == 6 && palabra.matches("[a-zA-Z]+")) {
-                break;
-            } else {
-                System.out.println("Palabra incorrecta, debe de tener 6 letras");
-            }
-        }
-        return palabra;
-    }
+    
