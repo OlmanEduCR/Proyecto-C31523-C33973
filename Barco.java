@@ -1,12 +1,10 @@
-public class Barcos{
+public class Barco{
     //Atributos
-    private String nombre;
     private char barco;
     private boolean estado;
 
     //Método Construtor
-    public Barcos(String nombre, char barco, boolean estado){
-        this.nombre = nombre;
+    public Barco(char barco, boolean estado){
         this.barco = barco;
         this.estado = estado;
     }
@@ -17,8 +15,8 @@ public class Barcos{
     }
 
     //Getters
-    public String getNombre(){
-        return this.nombre;
+    public char getBarco(){
+        return this.barco;
     }
 
     public boolean getEstado(){
