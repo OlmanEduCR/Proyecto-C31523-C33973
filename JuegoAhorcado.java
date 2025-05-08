@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class JuegoAhorcado {
+    private static Scanner scanner = new Scanner(System.in);
     //metodos
     public static String dibujarMu(int intentosFallados){
         switch(intentosFallados) {
@@ -142,4 +143,3 @@ public class JuegoAhorcado {
         }
         return palabra;
     }
-}
