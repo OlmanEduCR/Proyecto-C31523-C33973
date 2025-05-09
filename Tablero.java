@@ -2,14 +2,20 @@
 public class Tablero{
     //Atributos 
     private Barco[][] TableroDelJugador = new Barco[5][5];
-    char[] barcos = {'1', '2', '3'};
+    char[] indicesBarcos = {'1', '2', '3'};
 
     //Método Constructor
     public Tablero(){
-        for(int i=0; i<barcos.length; i++){
-            TableroDelJugador[0][i] = new Barco(barcos[i], true);
+        for(int i=0; i<indicesBarcos.length; i++){
+            TableroDelJugador[0][i] = new Barco(indicesBarcos[i], true);
         }
     }
+    //Getters
+    public Barco[][] getTableroDelJugador(){
+        return this.TableroDelJugador;
+    }
+
+    
 
     //Métodos
     public void mostrarTablero(){

@@ -14,6 +14,10 @@ public class Barco{
         this.estado = estadop;
     }
 
+    public void setBarco(char barcop){
+        this.barco = barcop;
+    }
+
     //Getters
     public char getBarco(){
         return this.barco;
