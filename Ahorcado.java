@@ -22,8 +22,7 @@ public class Ahorcado{
     this.palabraArrayJ2 = palabra2.toLowerCase().toCharArray();
     this.letrasPalabraJ1 = new char[palabra1.length()];
     this.letrasPalabraJ2 = new char[palabra2.length()];
-    
-    //llenar el array con el signo * para empezar
+      //llenar el array con el signo * para empezar
     for(int i = 0; i < letrasPalabraJ1.length; i++ ){
         letrasPalabraJ1[i] = '*';
     }
@@ -37,6 +36,7 @@ public class Ahorcado{
     this.turno = 1;
     this.finDelJuego = false;
     }
+
 
     //Getters
     public String getPalabraJ1(){
@@ -134,12 +134,13 @@ public class Ahorcado{
         this.finDelJuego = finDelJuego;
     }
 
-    //metodos 
+
+    //metodos  
 
     public String verificarLetra(int jugador, char letra) {
         letra = Character.toLowerCase(letra);    
         if(!Character.isLetter(letra)){
-            return "Ingrese una letra valida";
+            return "Ingrese una letra valida ";
         }
 
         char[] palabraArray;
@@ -171,17 +172,16 @@ public class Ahorcado{
                 intentos1--;
                 if (intentos1 <= 0){
                     finDelJuego = true;
-                    return "Te quedaste sin intentos";
+                    return "Te quedaste sin intentos ";
                 }
                 return "Letra incorrecta te quedan " + intentos1 + " intentos";
             } else { 
                 intentos2--;
                 if(intentos2<= 0) {
-    
                     finDelJuego =  true;
-                    return "Te quedaste sin intentos";
+                    return "Te quedaste sin intentos ";
                 }
-                return "Letra incorrecta te quedan " + intentos2 + " intentos";
+                return "Letra incorrecta te quedan " + intentos2 + " intentos ";
             }
         } else {
             boolean gano = true;
@@ -193,12 +193,12 @@ public class Ahorcado{
             } 
             if (gano){
                 finDelJuego = true;
-                return "Felicitaciones acerto la palabra";
+                return "Felicitaciones acerto la palabra ";
             }
-            return "Letra correcta";
+            return "Letra correcta ";
         }
     }
-    
+
     public String avanceEnLaPalabra(int jugador) {//Mostar los aciertos de la en las palabras dadas
         char[] letras;
         if(jugador == 1) {
@@ -208,16 +208,16 @@ public class Ahorcado{
         }
         return new String(letras);
     }
-        //cambio de turnos
-        public void cambiarTurno() {
-            if(turno == 1) {
-                turno = 2;
-            } else {
-                turno = 1;
-            }
+
+    //cambio de turnos
+    public void cambiarTurno() {
+        if(turno == 1) {
+            turno = 2;
+        } else {
+            turno = 1;
         }
     }
-
+}
 
 
 

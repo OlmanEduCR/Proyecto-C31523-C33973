@@ -67,20 +67,33 @@ public class JuegoAhorcado {
         }
 
     }
+
+
+    public static boolean esSoloLetras(String palabra) {
+        for (int i=0; i< palabra.length(); i++){
+            if (!Character.isLetter(palabra.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
     //solicitar palabra 
     private static String solicitarPalabra(int jugador){
         String palabra;
         while (true) {
             System.out.println("Jugador " + jugador + " ingrese una palabra de 6 letras ");
             palabra = scanner.nextLine().trim().toLowerCase(); //
-            if(palabra.length() == 6 && palabra.matches("[a-zA-Z]+")) {
+            
+            if(palabra.length() == 6 && esSoloLetras(palabra)){
                 break;
             } else {
-                System.out.println("Palabra incorrecta, debe de tener 6 letras");
+                System.out.println("La palabra debe de tener 6 letras ");
             }
         }
         return palabra;
     }
+
 
     //metodo juego
     public static void juego() {
@@ -104,7 +117,9 @@ public class JuegoAhorcado {
                 System.out.println("Ingresar letra ");
                 String entrada = scanner.nextLine();
                 //si la persona ingresa verias letras puede causar problemas enotnces para evitar eso usamos lo siguiente
-                if(entrada.length() != 1|| !entrada.matches("[a-zA-Z]+")) {
+                
+                
+                if(entrada.length() != 1|| !esSoloLetras(entrada)) {
                     System.out.println("Ingrese solo una letra");
                     continue;
                 }
