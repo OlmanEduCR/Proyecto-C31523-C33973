@@ -218,12 +218,3 @@ public class Ahorcado{
         }
     }
 }
-
-
-
-
-
-
-
-
-
