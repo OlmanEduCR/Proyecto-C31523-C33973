@@ -1,18 +1,20 @@
-
 public class Tablero{
     //Atributos 
-    private Barco[][] TableroDelJugador = new Barco[5][5];
-    char[] indicesBarcos = {'1', '2', '3'};
+    private Barco[][] TableroDelJugador;
 
     //Método Constructor
     public Tablero(){
-        for(int i=0; i<indicesBarcos.length; i++){
-            TableroDelJugador[0][i] = new Barco(indicesBarcos[i], true);
-        }
+        this.TableroDelJugador = new Barco[5][5];        
     }
+
     //Getters
     public Barco[][] getTableroDelJugador(){
         return this.TableroDelJugador;
+    }
+
+    //Setters
+    public void setTableroDelJugador(Barco[][] TableroDelJugadorP){
+        this.TableroDelJugador = TableroDelJugadorP;
     }
 
     
@@ -30,4 +32,17 @@ public class Tablero{
             System.out.println();
         }
     }
+
+    public boolean derrota(){
+        for(int i=0; i<TableroDelJugador.length; i++){
+            for(int j=0; j<TableroDelJugador.length; j++){
+                if(TableroDelJugador[i][j].getEstado() == false || TableroDelJugador[i][j] == null){
+                    return true;
+                }
+            }
+        } 
+        return false;
+    }
 }
+
+

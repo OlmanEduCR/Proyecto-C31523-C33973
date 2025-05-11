@@ -2,61 +2,56 @@ public class Jugador{
     //Atributos
     private String nombre;
     private Tablero tableropropio;
+    private int contadorBarcos;
 
     //Método constructor
-    public Jugador(String nombre){
+    public Jugador(String nombre, Tablero tableropropio, int contadorBarcos){
         this.nombre = nombre;
+        this.tableropropio = tableropropio;
+        this.contadorBarcos = 0;
     }
     
     //Setters
-    public void setNombre(String nombrep, Tablero tableropropio){
-        this.nombre = nombrep;
-        this.tableropropio = new Tablero();
+    public void setNombre(String nombreP){
+        this.nombre = nombreP;
     }
 
+    public void setTablero(Tablero tableropropioP){
+        this.tableropropio = tableropropioP;
+    }
     //Getters
     public String getNombre(){
         return this.nombre;
     }
 
-    //Métodos
-    //Batlla Naval
-    public boolean moverBarco(int coorF, int coorC, int numBarco){
-        int contadorF = 0;
-        int contadorC = 0;
-        Barco[][] tablerop = tableropropio.getTableroDelJugador(); 
-        for(Barco[] fila:tablerop){
-            if(contadorF == coorF){
-                for(Barco casillaBarco:fila){
-                    if(contadorC == coorC && casillaBarco.getEstado() != true){
-                        casillaBarco.setEstado(true);
-                        casillaBarco.setBarco(tableropropio.barcos[numBarco-1]);
-                        return true;
-                    }
-                    contadorC++;                    
-                }
-            }
-            contadorF++;   
-        } return false;
+    public Tablero getTableroPropio(){
+        return tableropropio;
     }
 
-    public void ataque(int coorF, int coorC, int numBarco){
-        Barco[][] tablerop = tableropropio.getTableroDelJugador();
-        int contadorF = 0;
-        int contadorC = 0; 
-        for(Barco[] fila:tablerop){
-            if(contadorF == coorF){
-                for(Barco casillaBarco:fila){
-                    if(contadorC == coorC && casillaBarco.getEstado() == true){
-                        casillaBarco.setEstado(false);
-                        casillaBarco.setBarco('X');
-                    } else{
-                        casillaBarco.setBarco('0');
-                    }
-                    contadorC++;                    
-                }
+    //Métodos
+    //Batlla Naval
+    public boolean moverBarco(int coorFila, int coorColumna) {
+        Barco[][] tablero = tableropropio.getTableroDelJugador();
+        char numBarco = (char)('1' + contadorBarcos);
+        if(contadorBarcos<3){
+            if (tablero[coorFila][coorColumna] == null) {
+                tablero[coorFila][coorColumna] = new Barco(numBarco, true);
+                contadorBarcos++;
+                return true;
+            } else {
+                return false;
             }
-            contadorF++;   
+        }
+        return false;           
+    }
+    public void ataque(int coorFila, int coorColumna){
+        Barco[][] tablero = tableropropio.getTableroDelJugador();
+        if (tablero[coorFila][coorColumna] != null){
+            tablero[coorFila][coorColumna] = new Barco('X', false);
+            System.out.println("¡Casilla " + (coorFila + "/" + coorColumna) + " era un barco!");
+        } else {
+            tablero[coorFila][coorColumna] = new Barco('0', false);
+            System.out.println("Casilla " + (coorFila + "/" + coorColumna) + " no hay impacto");
         }
     }
 }
