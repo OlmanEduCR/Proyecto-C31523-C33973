@@ -15,6 +15,8 @@ public class Juegos{
 
             switch(opcion) {
                 case 1:
+
+                    JuegoAhorcado.juego();
                                        
                     break;
                 
