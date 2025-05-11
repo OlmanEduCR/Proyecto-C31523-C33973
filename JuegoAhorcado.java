@@ -97,9 +97,13 @@ public class JuegoAhorcado {
 
     //metodo juego
     public static void juego() {
+      
+      
         System.out.println("bienvenido al juego de ahorcado ");
        
+        
         //solicitar las palabras 
+        
         String palabra1 = solicitarPalabra(1);
         for(int i = 0; i < 50; i++) System.out.println(); //impreme 30 lienas en blanco
 
@@ -110,6 +114,7 @@ public class JuegoAhorcado {
 
 
         Ahorcado juego = new Ahorcado(palabra1, palabra2);
+
             while (!juego.getFinDelJuego()) {
                 int turnoActual = juego.getTurno();
                 System.out.println("Turno del jugador " + turnoActual);
