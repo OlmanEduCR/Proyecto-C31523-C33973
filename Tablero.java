@@ -25,7 +25,8 @@ public class Tablero{
             for(int j=0; j<TableroDelJugador.length; j++){
                 if(TableroDelJugador[i][j] == null){
                     System.out.print("* ");
-                } else{
+                    TableroDelJugador[i][j] = new Barco('*', false);
+                } else {
                     System.out.print(TableroDelJugador[i][j].getBarco() + " ");
                 }
             }
@@ -34,14 +35,24 @@ public class Tablero{
     }
 
     public boolean derrota(){
+        int contadorX = 0;
         for(int i=0; i<TableroDelJugador.length; i++){
             for(int j=0; j<TableroDelJugador.length; j++){
-                if(TableroDelJugador[i][j].getEstado() == false || TableroDelJugador[i][j] == null){
-                    return true;
+                if(this.TableroDelJugador[i][j].getBarco() == 'X' && TableroDelJugador[i][j] != null){
+                    contadorX++;
                 }
             }
-        } 
+        }
+        if(contadorX>=3){
+            return true;
+        }
         return false;
+    }
+
+    public boolean verificarCasilla(int coorFila, int coorColumna){
+        if(coorFila<TableroDelJugador.length || coorColumna<TableroDelJugador.length){
+            return true;
+        } return false;
     }
 }
 

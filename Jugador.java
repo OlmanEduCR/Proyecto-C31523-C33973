@@ -28,14 +28,22 @@ public class Jugador{
         return tableropropio;
     }
 
+    public int getContadorBarcos(){
+        return contadorBarcos;
+    }
+
     //Métodos
     //Batlla Naval
-    public boolean moverBarco(int coorFila, int coorColumna) {
+    public boolean moverBarco(int coorColumna, int coorFila) {
         Barco[][] tablero = tableropropio.getTableroDelJugador();
         char numBarco = (char)('1' + contadorBarcos);
+        if (coorColumna < 1 || coorFila < 1 || coorColumna > tablero.length || coorFila > tablero[0].length) {
+            return false;
+        }
+        
         if(contadorBarcos<3){
-            if (tablero[coorFila][coorColumna] == null) {
-                tablero[coorFila][coorColumna] = new Barco(numBarco, true);
+            if (tablero[(coorColumna - 1)][(coorFila - 1)] == null || tablero[(coorColumna - 1)][(coorFila - 1)].getBarco() == '*' ){
+                tablero[(coorColumna - 1)][(coorFila - 1)] = new Barco(numBarco, true);
                 contadorBarcos++;
                 return true;
             } else {
@@ -44,14 +52,21 @@ public class Jugador{
         }
         return false;           
     }
-    public void ataque(int coorFila, int coorColumna){
+    public void ataque(int coorColumna, int coorFila){
         Barco[][] tablero = tableropropio.getTableroDelJugador();
-        if (tablero[coorFila][coorColumna] != null){
-            tablero[coorFila][coorColumna] = new Barco('X', false);
-            System.out.println("¡Casilla " + (coorFila + "/" + coorColumna) + " era un barco!");
+        if (coorColumna < 1 || coorFila < 1 || coorColumna > tablero.length || coorFila > tablero[0].length) {
+            return;
+        }
+        Barco casillaTablero = tablero[(coorFila-1)][(coorColumna-1)];
+
+        if (casillaTablero != null && casillaTablero.getBarco() == '*'){
+            tablero[(coorFila-1)][(coorColumna-1)] = new Barco('0', false);
+            System.out.println("Casilla " + (coorColumna + "/" + coorFila) + " no hay impacto");
+            tableropropio.mostrarTablero();
         } else {
-            tablero[coorFila][coorColumna] = new Barco('0', false);
-            System.out.println("Casilla " + (coorFila + "/" + coorColumna) + " no hay impacto");
+            tablero[(coorFila-1)][(coorColumna-1)] = new Barco('X', false);
+            System.out.println("¡Casilla " + (coorColumna + "/" + coorFila) + " era un barco!");
+            tableropropio.mostrarTablero();
         }
     }
 }

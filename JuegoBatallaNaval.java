@@ -17,37 +17,72 @@ public class JuegoBatallaNaval{
 
     //Prejuego
     public static void fasePrevia(){
+        //Jugador 1
         System.out.println(jugador1.getNombre() + " ingrese la posición de sus barcos");
-        jugador1.moverBarco(entrada.nextInt(),entrada.nextInt());
-        if(entrada.nextInt()>jugador1.getTableroPropio().getTableroDelJugador().length){
-            System.out.println("Digite coordenadas dentro del espacio (5x5)");
+        int barcosColocadosJ1 = 0;
+        while (barcosColocadosJ1 < 3) {
+            System.out.println("Barco #" + (barcosColocadosJ1 + 1));
+            System.out.print("Digite la Fila: ");
+            int fila = entrada.nextInt();
+            System.out.print("Digite la Columna: ");
+            int columna = entrada.nextInt();
+
+            boolean exito = jugador1.moverBarco(columna, fila);
+
+            if (exito) {
+                barcosColocadosJ1++;
+                jugador1.getTableroPropio().mostrarTablero();
+            } else {
+            System.out.println("Posición inválida o ya ocupada. Intente de nuevo.");
         }
-        jugador1.getTableroPropio().mostrarTablero();
+    }
+    
+        //Jugador 2
         System.out.println(jugador2.getNombre() + " ingrese la posición de sus barcos");
-        jugador2.moverBarco(entrada.nextInt(),entrada.nextInt());
-        if(entrada.nextInt()>jugador1.getTableroPropio().getTableroDelJugador().length){
-            System.out.println("Digite coordenadas dentro del espacio (5x5)");
+        int barcosColocadosJ2 = 0;
+        while (barcosColocadosJ2 < 3) {
+            System.out.println("Barco #" + (barcosColocadosJ2 + 1));
+            System.out.print("Digite la Fila: ");
+            int fila = entrada.nextInt();
+            System.out.print("Digite la Columna: ");
+            int columna = entrada.nextInt();
+
+            boolean exito = jugador2.moverBarco(columna, fila);
+
+            if (exito) {
+                barcosColocadosJ2++;
+                jugador2.getTableroPropio().mostrarTablero();
+            } else {
+            System.out.println("Posición inválida o ya ocupada. Intente de nuevo.");
+            }
         }
-        jugador2.getTableroPropio().mostrarTablero();
     }
 
     //Juego
     public static void juegoBatallaNaval(){
         System.out.println("Empieza " + jugador1.getNombre());
-        do{
-            jugador2.ataque(entrada.nextInt(), entrada.nextInt());
-            System.out.println("Siguinte turno de " + jugador2.getNombre());
-            jugador1.ataque(entrada.nextInt(), entrada.nextInt());
-            System.out.println("Siguinte turno de " + jugador1.getNombre());
-        } while(jugador1.getTableroPropio().derrota() == true || jugador2.getTableroPropio().derrota() == true);
-    }
+        while(!jugador1.getTableroPropio().derrota() && !jugador2.getTableroPropio().derrota()){
+            // Turno del Jugador 1
+            System.out.println(jugador1.getNombre() + ", ingrese las coordenadas para atacar:");
+            int colAtaque1 = entrada.nextInt();
+            int filaAtaque1 = entrada.nextInt();
+            jugador2.ataque(colAtaque1, filaAtaque1);
 
-    //Ganador
-    public static void ganador(){
-        if(jugador1.getTableroPropio().derrota() != true){
-            System.out.println("¡El ganador es " + jugador1.getNombre());
-        } else {
-            System.out.println("¡El ganador es " + jugador2.getNombre());
+            if (jugador2.getTableroPropio().derrota()) {
+                System.out.println(jugador2.getNombre() + " ha perdido todos sus barcos. ¡" + jugador1.getNombre() + " gana!");
+                break;
+            }
+
+            // Turno del Jugador 2
+            System.out.println(jugador2.getNombre() + ", ingrese las coordenadas para atacar:");
+            int colAtaque2 = entrada.nextInt();
+            int filaAtaque2 = entrada.nextInt();
+            jugador1.ataque(colAtaque2, filaAtaque2);
+
+            if (jugador1.getTableroPropio().derrota()) {
+                System.out.println(jugador1.getNombre() + " ha perdido todos sus barcos. ¡" + jugador2.getNombre() + " gana!");
+                break;
+            }
         }
     }
 }

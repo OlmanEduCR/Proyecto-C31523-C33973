@@ -27,12 +27,8 @@ public class Juegos{
                     //Mover los Barcos
                     JuegoBatallaNaval.fasePrevia();
 
-                    //Juego
+                    //Juego y Ganador
                     JuegoBatallaNaval.juegoBatallaNaval();
-
-                    //Final
-                    JuegoBatallaNaval.ganador(); 
-                    break;
                 
                 case 3:
                     System.out.println("¡Gracias por jugar!");
