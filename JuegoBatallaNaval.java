@@ -22,9 +22,9 @@ public class JuegoBatallaNaval{
         int barcosColocadosJ1 = 0;
         while (barcosColocadosJ1 < 3) {
             System.out.println("Barco #" + (barcosColocadosJ1 + 1));
-            System.out.print("Digite la Fila: ");
-            int fila = entrada.nextInt();
             System.out.print("Digite la Columna: ");
+            int fila = entrada.nextInt();
+            System.out.print("Digite la Fila: ");
             int columna = entrada.nextInt();
 
             boolean exito = jugador1.moverBarco(columna, fila);
@@ -42,9 +42,9 @@ public class JuegoBatallaNaval{
         int barcosColocadosJ2 = 0;
         while (barcosColocadosJ2 < 3) {
             System.out.println("Barco #" + (barcosColocadosJ2 + 1));
-            System.out.print("Digite la Fila: ");
-            int fila = entrada.nextInt();
             System.out.print("Digite la Columna: ");
+            int fila = entrada.nextInt();
+            System.out.print("Digite la Fila: ");
             int columna = entrada.nextInt();
 
             boolean exito = jugador2.moverBarco(columna, fila);
