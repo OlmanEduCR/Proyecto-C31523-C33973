@@ -82,7 +82,7 @@ public class JuegoAhorcado {
     private static String solicitarPalabra(int jugador){
         String palabra;
         while (true) {
-            System.out.println("Jugador " + jugador + " ingrese una palabra de 6 letras ");
+            System.out.println("Jugador " + jugador + " ingrese una palabra de 6 letras para su oponente ");
             palabra = scanner.nextLine().trim().toLowerCase(); //
             
             if(palabra.length() == 6 && esSoloLetras(palabra)){
@@ -97,27 +97,20 @@ public class JuegoAhorcado {
 
     //metodo juego
     public static void juego() {
-      
-      
-        System.out.println("bienvenido al juego de ahorcado ");
-       
+        System.out.println("Bienvenido al juego de Ahorcado ");
         
         //solicitar las palabras 
-        
         String palabra1 = solicitarPalabra(1);
         for(int i = 0; i < 50; i++) System.out.println(); //impreme 30 lienas en blanco
 
         String palabra2 = solicitarPalabra(2);
         for(int i = 0; i < 50; i++) System.out.println();
       
-
-
-
         Ahorcado juego = new Ahorcado(palabra1, palabra2);
 
             while (!juego.getFinDelJuego()) {
                 int turnoActual = juego.getTurno();
-                System.out.println("Turno del jugador " + turnoActual);
+                System.out.println("Palabra ingresada por el jugador " + turnoActual + " para el oponente " );
                 System.out.println("Palabra " + juego.avanceEnLaPalabra(turnoActual));
                 System.out.println("Ingresar letra ");
                 String entrada = scanner.nextLine();
@@ -150,7 +143,7 @@ public class JuegoAhorcado {
                 
                 if (juego.getFinDelJuego()){
                     System.out.println("Juego terminado");
-                    System.out.println("Avance final del jugador " + turnoActual + juego.avanceEnLaPalabra(turnoActual));
+                    System.out.println("Fin del juego el jugador " + turnoActual + " adivino la palara: " + juego.avanceEnLaPalabra(turnoActual));
                     break;
                 }
             }
