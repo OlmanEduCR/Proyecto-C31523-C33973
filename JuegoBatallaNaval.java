@@ -29,10 +29,10 @@ public class JuegoBatallaNaval{
 
             boolean exito = jugador1.moverBarco(columna, fila);
 
-            if (exito) {
+            if(exito){
                 barcosColocadosJ1++;
                 jugador1.getTableroPropio().mostrarTablero();
-            } else {
+            }else{
             System.out.println("Posición inválida o ya ocupada. Intente de nuevo.");
         }
     }
@@ -49,10 +49,10 @@ public class JuegoBatallaNaval{
 
             boolean exito = jugador2.moverBarco(columna, fila);
 
-            if (exito) {
+            if(exito){
                 barcosColocadosJ2++;
                 jugador2.getTableroPropio().mostrarTablero();
-            } else {
+            }else{
             System.out.println("Posición inválida o ya ocupada. Intente de nuevo.");
             }
         }
@@ -64,22 +64,38 @@ public class JuegoBatallaNaval{
         while(!jugador1.getTableroPropio().derrota() && !jugador2.getTableroPropio().derrota()){
             // Turno del Jugador 1
             System.out.println(jugador1.getNombre() + ", ingrese las coordenadas para atacar:");
+            System.out.println("Digite la columna que desee atacar: ");
             int colAtaque1 = entrada.nextInt();
+            System.out.println("Digite la fila que desee atacar: ");
             int filaAtaque1 = entrada.nextInt();
             jugador2.ataque(colAtaque1, filaAtaque1);
 
-            if (jugador2.getTableroPropio().derrota()) {
+            boolean ataqueConExitoJ1 = jugador2.ataque(colAtaque1, filaAtaque1);
+
+            if(ataqueConExitoJ1 == false){
+                System.out.println("Coordenadas fuera del mapa. Penalización de turno.");
+            }
+
+            if (jugador2.getTableroPropio().derrota()){
                 System.out.println(jugador2.getNombre() + " ha perdido todos sus barcos. ¡" + jugador1.getNombre() + " gana!");
                 break;
             }
 
             // Turno del Jugador 2
             System.out.println(jugador2.getNombre() + ", ingrese las coordenadas para atacar:");
+            System.out.println("Digite la columna que desee atacar: ");
             int colAtaque2 = entrada.nextInt();
+            System.out.println("Digite la fila que desee atacar: ");
             int filaAtaque2 = entrada.nextInt();
             jugador1.ataque(colAtaque2, filaAtaque2);
 
-            if (jugador1.getTableroPropio().derrota()) {
+            boolean ataqueConExitoJ2 = jugador2.ataque(colAtaque2, filaAtaque2);
+
+            if(ataqueConExitoJ2 == false){
+                System.out.println("Coordenadas fuera del mapa. Penalización de turno.");
+            }
+
+            if(jugador1.getTableroPropio().derrota()){
                 System.out.println(jugador1.getNombre() + " ha perdido todos sus barcos. ¡" + jugador2.getNombre() + " gana!");
                 break;
             }

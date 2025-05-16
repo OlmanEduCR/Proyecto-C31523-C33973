@@ -52,10 +52,10 @@ public class Jugador{
         }
         return false;           
     }
-    public void ataque(int coorColumna, int coorFila){
+    public boolean ataque(int coorColumna, int coorFila){
         Barco[][] tablero = tableropropio.getTableroDelJugador();
         if (coorColumna < 1 || coorFila < 1 || coorColumna > tablero.length || coorFila > tablero[0].length) {
-            return;
+            return false;
         }
         Barco casillaTablero = tablero[(coorFila-1)][(coorColumna-1)];
 
@@ -68,5 +68,6 @@ public class Jugador{
             System.out.println("¡Casilla " + (coorColumna + "/" + coorFila) + " era un barco!");
             tableropropio.mostrarTablero();
         }
+        return true;
     }
 }
