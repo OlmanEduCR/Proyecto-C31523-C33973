@@ -10,12 +10,13 @@ public class Jugador{
     private boolean[] letrasVerificadas; 
     private int intentos;  
 
-    //Método constructor
+    //Metodo constructor
     public Jugador(String nombre, Tablero tableropropio, int contadorBarcos){
         this.nombre = nombre;
         this.tableropropio = tableropropio;
         this.contadorBarcos = 0;
     }
+
     public Jugador(String palabra) {
         this.palabra = palabra.toLowerCase();
         this.palabraArray = this.palabra.toCharArray();
@@ -27,7 +28,6 @@ public class Jugador{
         }
         this.intentos = 6;
     }
-
 
     //Setters
     public void setNombre(String nombreP){
@@ -63,7 +63,6 @@ public class Jugador{
     public String getLetrasAdivinadas() {
         return new String(letrasAdivinadas);
     }
-
 
     //Métodos
     //Batlla Naval
