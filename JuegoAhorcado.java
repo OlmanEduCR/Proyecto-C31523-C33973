@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class JuegoAhorcado {
     private static Scanner scanner = new Scanner(System.in);
 
-    // Dibujo del ahorcado según intentos fallados
-    public static String dibujarMu(int intentosFallados) {
+    // Dibujo del ahorcado segun intentos fallados
+    public static String dibujarMuneco(int intentosFallados) {
         switch (intentosFallados) {
             case 0:
                 return  "       \n" +
@@ -42,7 +42,7 @@ public class JuegoAhorcado {
                 return  "   _____\n" +
                         "   |   |\n" +
                         "   0   |\n" +
-                        "  /|\\  |\n" +  
+                        "  /|\\ |\n" +  
                         "       |\n" +
                         "       |\n" +
                         "_______|\n";
@@ -50,7 +50,7 @@ public class JuegoAhorcado {
                 return  "   _____\n" +
                         "   |   |\n" +
                         "   0   |\n" +
-                        "  /|\\  |\n" +
+                        "  /|\\ |\n" +
                         "  /    |\n" +
                         "       |\n" +
                         "_______|\n";
@@ -58,12 +58,12 @@ public class JuegoAhorcado {
                 return  "   _____\n" +
                         "   |   |\n" +
                         "   0   |\n" +
-                        "  /|\\  |\n" +
-                        "  / \\  |\n" +
+                        "  /|\\ |\n" +
+                        "  / \\ |\n" +
                         "       |\n" +
                         "_______|\n";
             default:
-                return "Sin más intentos.";
+                return "Sin mas intentos.";
         }
     }
 
@@ -93,7 +93,7 @@ public class JuegoAhorcado {
         return palabra;
     }
 
-    // Método principal del juego
+    // Juego
     public static void juego() {
         System.out.println("Bienvenido al juego de Ahorcado");
 
@@ -105,7 +105,7 @@ public class JuegoAhorcado {
 
         Ahorcado juego = new Ahorcado(palabra1, palabra2);
 
-        while (!juego.isFinDelJuego()) {
+        while (!juego.getFinDelJuego()) {
             int turnoActual = juego.getTurno();
             System.out.println("Turno del jugador " + turnoActual);
             System.out.println("Palabra para adivinar: " + juego.avanceActual());
@@ -123,14 +123,14 @@ public class JuegoAhorcado {
             System.out.println(resultado);
 
             int intentosRestantes = juego.intentosRestantes();
-            System.out.println(dibujarMu(6 - intentosRestantes));
+            System.out.println(dibujarMuneco(6 - intentosRestantes));
 
             // Cambiar turno solo si la letra fue incorrecta y el juego no terminó
-            if (resultado.toLowerCase().contains("incorrecta") && !juego.isFinDelJuego()) {
+            if (resultado.toLowerCase().contains("incorrecta") && !juego.getFinDelJuego()) {
                 juego.cambiarTurno();
             }
 
-            if (juego.isFinDelJuego()) {
+            if (juego.getFinDelJuego()) {
                 System.out.println("Juego terminado.");
                 System.out.println("La palabra era: " + juego.getJugadorActual().getPalabra());
                 break;

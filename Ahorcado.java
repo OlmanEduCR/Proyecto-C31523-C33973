@@ -15,7 +15,7 @@ public class Ahorcado {
         return turno;
     }
 
-    public boolean isFinDelJuego() {
+    public boolean getFinDelJuego() {
         return finDelJuego;
     }
 
@@ -27,7 +27,6 @@ public class Ahorcado {
         return (turno == 1) ? jugador2 : jugador1;
     }
 
-    
     public String jugarTurno(char letra) {
         if (finDelJuego) {
             return "El juego ha terminado.";
@@ -48,20 +47,17 @@ public class Ahorcado {
             finDelJuego = true;
             return resultado + " El jugador " + turno + " perdio.";
         }
-
         return resultado;
     }
 
     public void cambiarTurno() {
         turno = (turno == 1) ? 2 : 1;
     }
-
     
     public String avanceActual() {
         return getJugadorOponente().getLetrasAdivinadas();
     }
 
-    
     public int intentosRestantes() {
         return getJugadorActual().getIntentos();
     }
