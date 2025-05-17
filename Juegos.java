@@ -17,6 +17,7 @@ public class Juegos{
                 case 1:
 
                     JuegoAhorcado.juego();
+                    //Juego Ahorcado se despliega si opcion es 1
                                        
                     break;
                 
@@ -29,6 +30,8 @@ public class Juegos{
 
                     //Juego y Ganador
                     JuegoBatallaNaval.juegoBatallaNaval();
+
+                    //Juego Batalla Naval se despliega si opcion es 2
                 
                 case 3:
                     System.out.println("¡Gracias por jugar!");

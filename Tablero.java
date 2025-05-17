@@ -1,10 +1,16 @@
 public class Tablero{
+
     //Atributos 
     private Barco[][] TableroDelJugador;
 
     //Método Constructor
     public Tablero(){
-        this.TableroDelJugador = new Barco[5][5];        
+        this.TableroDelJugador = new Barco[5][5];
+        for(int i=0; i< TableroDelJugador.length; i++){
+            for(int j=0; j< TableroDelJugador.length; j++){
+                TableroDelJugador[i][j] = new Barco('*', false);
+            }
+        }        
     }
 
     //Getters
@@ -23,9 +29,8 @@ public class Tablero{
     public void mostrarTablero(){
         for(int i=0; i<TableroDelJugador.length; i++){
             for(int j=0; j<TableroDelJugador.length; j++){
-                if(TableroDelJugador[i][j] == null){
+                if(TableroDelJugador[i][j].getBarco() == '*'){
                     System.out.print("* ");
-                    TableroDelJugador[i][j] = new Barco('*', false);
                 } else {
                     System.out.print(TableroDelJugador[i][j].getBarco() + " ");
                 }
@@ -38,22 +43,14 @@ public class Tablero{
         int contadorX = 0;
         for(int i=0; i<TableroDelJugador.length; i++){
             for(int j=0; j<TableroDelJugador.length; j++){
-                if(this.TableroDelJugador[i][j].getBarco() == 'X' && TableroDelJugador[i][j] != null){
+                if(this.TableroDelJugador[i][j].getBarco() == 'X'){
                     contadorX++;
                 }
             }
         }
-        if(contadorX>=3){
-            return true;
+        if(contadorX<3){
+            return false;
         }
-        return false;
-    }
-
-    public boolean verificarCasilla(int coorFila, int coorColumna){
-        if(coorFila<TableroDelJugador.length || coorColumna<TableroDelJugador.length){
-            return true;
-        } return false;
+        return true;
     }
 }
-
-

@@ -1,9 +1,11 @@
 public class Ahorcado {
+    //Atributos
     private Jugador jugador1;
     private Jugador jugador2;
     private int turno;          // 1 o 2
     private boolean finDelJuego;
 
+    //Método Constructor
     public Ahorcado(String palabra1, String palabra2) {
         jugador1 = new Jugador(palabra1);
         jugador2 = new Jugador(palabra2);
@@ -11,6 +13,7 @@ public class Ahorcado {
         finDelJuego = false;
     }
 
+    //Getters
     public int getTurno() {
         return turno;
     }
@@ -27,6 +30,7 @@ public class Ahorcado {
         return (turno == 1) ? jugador2 : jugador1;
     }
 
+    //Métodos
     public String jugarTurno(char letra) {
         if (finDelJuego) {
             return "El juego ha terminado.";
