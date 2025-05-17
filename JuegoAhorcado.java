@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class JuegoAhorcado {
     private static Scanner scanner = new Scanner(System.in);
-    
-    //metodos
-    public static String dibujarMu(int intentosFallados){
-        switch(intentosFallados) {
+
+    // Dibujo del ahorcado según intentos fallados
+    public static String dibujarMu(int intentosFallados) {
+        switch (intentosFallados) {
             case 0:
                 return  "       \n" +
                         "       \n" +
@@ -42,7 +42,7 @@ public class JuegoAhorcado {
                 return  "   _____\n" +
                         "   |   |\n" +
                         "   0   |\n" +
-                        "  /|\\ |\n" +  
+                        "  /|\\  |\n" +  
                         "       |\n" +
                         "       |\n" +
                         "_______|\n";
@@ -50,7 +50,7 @@ public class JuegoAhorcado {
                 return  "   _____\n" +
                         "   |   |\n" +
                         "   0   |\n" +
-                        "  /|\\ |\n" +
+                        "  /|\\  |\n" +
                         "  /    |\n" +
                         "       |\n" +
                         "_______|\n";
@@ -58,96 +58,85 @@ public class JuegoAhorcado {
                 return  "   _____\n" +
                         "   |   |\n" +
                         "   0   |\n" +
-                        "  /|\\ |\n" +
-                        "  / \\ |\n" +
+                        "  /|\\  |\n" +
+                        "  / \\  |\n" +
                         "       |\n" +
                         "_______|\n";
             default:
-                return "Sin mas intentos ";
+                return "Sin más intentos.";
         }
-
     }
 
-
+    // Verifica que la cadena contenga solo letras
     public static boolean esSoloLetras(String palabra) {
-        for (int i=0; i< palabra.length(); i++){
-            if (!Character.isLetter(palabra.charAt(i))){
+        for (int i = 0; i < palabra.length(); i++) {
+            if (!Character.isLetter(palabra.charAt(i))) {
                 return false;
             }
         }
         return true;
     }
 
-    //solicitar palabra 
-    private static String solicitarPalabra(int jugador){
+    // Solicitar palabra al jugador
+    private static String solicitarPalabra(int jugador) {
         String palabra;
         while (true) {
-            System.out.println("Jugador " + jugador + " ingrese una palabra de 6 letras para su oponente ");
-            palabra = scanner.nextLine().trim().toLowerCase(); //
-            
-            if(palabra.length() == 6 && esSoloLetras(palabra)){
+            System.out.println("Jugador " + jugador + ", ingrese una palabra de 6 letras para su oponente:");
+            palabra = scanner.nextLine().trim().toLowerCase();
+
+            if (palabra.length() == 6 && esSoloLetras(palabra)) {
                 break;
             } else {
-                System.out.println("La palabra debe de tener 6 letras ");
+                System.out.println("La palabra debe tener exactamente 6 letras y solo letras.");
             }
         }
         return palabra;
     }
 
-
-    //metodo juego
+    // Método principal del juego
     public static void juego() {
-        System.out.println("Bienvenido al juego de Ahorcado ");
-        
-        //solicitar las palabras 
+        System.out.println("Bienvenido al juego de Ahorcado");
+
         String palabra1 = solicitarPalabra(1);
-        for(int i = 0; i < 50; i++) System.out.println(); //impreme 30 lienas en blanco
+        for (int i = 0; i < 50; i++) System.out.println(); // Limpiar pantalla
 
         String palabra2 = solicitarPalabra(2);
-        for(int i = 0; i < 50; i++) System.out.println();
-      
+        for (int i = 0; i < 50; i++) System.out.println();
+
         Ahorcado juego = new Ahorcado(palabra1, palabra2);
 
-            while (!juego.getFinDelJuego()) {
-                int turnoActual = juego.getTurno();
-                System.out.println("Palabra ingresada por el jugador " + turnoActual + " para el oponente " );
-                System.out.println("Palabra " + juego.avanceEnLaPalabra(turnoActual));
-                System.out.println("Ingresar letra ");
-                String entrada = scanner.nextLine();
-                //si la persona ingresa verias letras puede causar problemas enotnces para evitar eso usamos lo siguiente
-                
-                
-                if(entrada.length() != 1|| !esSoloLetras(entrada)) {
-                    System.out.println("Ingrese solo una letra");
-                    continue;
-                }
-                char letra = entrada.charAt(0);
-                String resultado = juego.verificarLetra(turnoActual,letra);
-                System.out.println(resultado);
-                
-                int intentosRestantes;
-                
-                if(turnoActual == 1) {
-                    intentosRestantes = juego.getIntentos1();
-                } else {
-                    intentosRestantes = juego.getIntentos2();
-                }
-                String mensaje = "Fallaste, te queda " + intentosRestantes + "intentos";
-                
-                System.out.println(dibujarMu(6 - intentosRestantes));
-                
+        while (!juego.isFinDelJuego()) {
+            int turnoActual = juego.getTurno();
+            System.out.println("Turno del jugador " + turnoActual);
+            System.out.println("Palabra para adivinar: " + juego.avanceActual());
+            System.out.print("Ingrese una letra: ");
 
-                if (resultado.toLowerCase().contains("incorrecta")) {
-                    juego.cambiarTurno();
-                }
-                
-                if (juego.getFinDelJuego()){
-                    System.out.println("Juego terminado");
-                    System.out.println("Fin del juego el jugador " + turnoActual + " adivino la palara: " + juego.avanceEnLaPalabra(turnoActual));
-                    break;
-                }
+            String entrada = scanner.nextLine().trim();
+
+            if (entrada.length() != 1 || !esSoloLetras(entrada)) {
+                System.out.println("Por favor, ingrese solo una letra válida.");
+                continue;
+            }
+
+            char letra = entrada.charAt(0);
+            String resultado = juego.jugarTurno(letra);
+            System.out.println(resultado);
+
+            int intentosRestantes = juego.intentosRestantes();
+            System.out.println(dibujarMu(6 - intentosRestantes));
+
+            // Cambiar turno solo si la letra fue incorrecta y el juego no terminó
+            if (resultado.toLowerCase().contains("incorrecta") && !juego.isFinDelJuego()) {
+                juego.cambiarTurno();
+            }
+
+            if (juego.isFinDelJuego()) {
+                System.out.println("Juego terminado.");
+                System.out.println("La palabra era: " + juego.getJugadorActual().getPalabra());
+                break;
             }
         }
+    }
 
-    } 
     
+}

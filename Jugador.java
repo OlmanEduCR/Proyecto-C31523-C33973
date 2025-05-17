@@ -4,13 +4,31 @@ public class Jugador{
     private Tablero tableropropio;
     private int contadorBarcos;
 
+    private String palabra;          
+    private char[] palabraArray;     
+    private char[] letrasAdivinadas; 
+    private boolean[] letrasVerificadas; 
+    private int intentos;  
+
     //Método constructor
     public Jugador(String nombre, Tablero tableropropio, int contadorBarcos){
         this.nombre = nombre;
         this.tableropropio = tableropropio;
         this.contadorBarcos = 0;
     }
-    
+    public Jugador(String palabra) {
+        this.palabra = palabra.toLowerCase();
+        this.palabraArray = this.palabra.toCharArray();
+        this.letrasAdivinadas = new char[palabra.length()];
+        this.letrasVerificadas = new boolean[palabra.length()];
+        for (int i = 0; i < letrasAdivinadas.length; i++) {
+            letrasAdivinadas[i] = '*';
+            letrasVerificadas[i] = false;
+        }
+        this.intentos = 6;
+    }
+
+
     //Setters
     public void setNombre(String nombreP){
         this.nombre = nombreP;
@@ -19,7 +37,9 @@ public class Jugador{
     public void setTablero(Tablero tableropropioP){
         this.tableropropio = tableropropioP;
     }
+    
     //Getters
+
     public String getNombre(){
         return this.nombre;
     }
@@ -31,6 +51,19 @@ public class Jugador{
     public int getContadorBarcos(){
         return contadorBarcos;
     }
+
+    public String getPalabra() {
+        return palabra;
+    }
+
+    public int getIntentos() {
+        return intentos;
+    }
+
+    public String getLetrasAdivinadas() {
+        return new String(letrasAdivinadas);
+    }
+
 
     //Métodos
     //Batlla Naval
@@ -67,6 +100,54 @@ public class Jugador{
             tablero[(coorFila-1)][(coorColumna-1)] = new Barco('X', false);
             System.out.println("¡Casilla " + (coorColumna + "/" + coorFila) + " era un barco!");
             tableropropio.mostrarTablero();
+        }
+        return true;
+    }
+
+    public String verificarLetra(char letra) {
+        letra = Character.toLowerCase(letra);
+        if (!Character.isLetter(letra)) {
+            return "Ingrese una letra válida.";
+        }
+
+        boolean letraEncontrada = false;
+
+        for (int i = 0; i < palabraArray.length; i++) {
+            if (palabraArray[i] == letra && !letrasVerificadas[i]) {
+                letrasAdivinadas[i] = letra;
+                letrasVerificadas[i] = true;
+                letraEncontrada = true;
+            }
+        }
+
+        if (!letraEncontrada) {
+            intentos--;
+            if (intentos <= 0) {
+                return "Te quedaste sin intentos.";
+            }
+            return "Letra incorrecta. Te quedan " + intentos + " intentos.";
+        } else {
+            // Verificar si ganó
+            for (boolean b : letrasVerificadas) {
+                if (!b) {
+                    return "Letra correcta.";
+                }
+            }
+            return "¡Felicitaciones! Adivinaste la palabra.";
+        }
+    }
+    
+    public void restarIntentos(){
+        intentos--;
+    }
+
+    public boolean estaSinIntentos() {
+        return intentos <= 0;
+    }
+
+    public boolean haGanado() {
+        for (boolean b : letrasVerificadas) {
+            if (!b) return false;
         }
         return true;
     }
