@@ -1,20 +1,21 @@
 # Proyecto-C31523-C33973
 Proyecto
-¡Bienvenido a Ahorcado y Batalla Naval!
+Bienvenido a Ahorcado y Batalla Naval!
 
-Aquí tienes una pequeña descripción de cómo jugar a los dos juegos:
+Como ejecutar el proyecto
+-Asegurate de tener instalado Java (JDK 8).
+-Compila los archivos `.java` con el comando: javac 
+
+Ejecuta el programa principal con: java Juegos
+
+Aqui tienes una pequeña descripción de cómo jugar a los dos juegos:
 
 1/Ahorcado
-Bienvenido al juego del Ahorcado
-En este juego competiras contra otra persona para ver quien adivina primero la palabra del oponente antes de ser "ahorcado".
-Reglas del juego
--Cada jugador debe ingresar una palabra de exactamente 6 letras para que ambos esten en igualdad de condiciones y el juego inicie.
--Solo se permiten letras, sin numeros ni caracteres especiales.
--El juego comienza con el Jugador 1 intentando adivinar la palabra del Jugador 2, 
-y luego el Jugador 2 intentara adivinar la palabra del Jugador 1.
--El juego continua hasta que uno de los jugadores adivine la palabra del otro.
--Gana el que primero adivine y pierde el que se queda sin intentos
-A jugar!
+- Compite contra otro jugador para adivinar la palabra del oponente.
+- Cada jugador debe ingresar una palabra de exactamente 6 letras (solo letras, sin numeros ni caracteres especiales).
+- El juego comienza con el Jugador 1 intentando adivinar la palabra del Jugador 2, luego viceversa.
+- El juego continua hasta que uno adivine la palabra del otro.
+- Gana quien adivine primero; pierde quien se quede sin intentos.
 
 2/Batalla Naval
 En la opción 2 tenemos el juego clásico de Batalla Naval, donde la estrategia lo es todo, bueno, y un poco de suerte.
