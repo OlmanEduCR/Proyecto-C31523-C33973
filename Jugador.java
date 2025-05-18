@@ -64,7 +64,7 @@ public class Jugador{
         return new String(letrasAdivinadas);
     }
 
-    //Métodos
+    //Metodos
     //Batlla Naval
     public boolean moverBarco(int coorColumna, int coorFila) {
         Barco[][] tablero = tableropropio.getTableroDelJugador();
