@@ -25,14 +25,5 @@ public class Barco{
 
     public boolean getEstado(){
         return this.estado;
-    }
-
-    //Métodos
-    public boolean estadoDelBarco(){
-        boolean estado = false;
-        if(barco != 0){
-            estado = true;
-        }
-        return estado;
-    }    
+    }  
 }

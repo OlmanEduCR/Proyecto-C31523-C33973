@@ -26,6 +26,9 @@ public class Tablero{
     
 
     //Métodos
+    /*Este método se encarga de generar en consola un recuadro 5x5 que dimesione un tablero, y almacena los barcos caidos y los espacios 
+     *vacios que no han sido atacados.
+     */
     public void mostrarTablero(){
         for(int i=0; i<TableroDelJugador.length; i++){
             for(int j=0; j<TableroDelJugador.length; j++){
@@ -39,6 +42,9 @@ public class Tablero{
         }
     }
 
+    /*Es el encargado de verificar entrada por entrada vara ver cuantas 'X' existen en el tablero, al haber un limite de 3
+     * con que determine los tres barcos con char 'X', el juego termina.
+     */
     public boolean derrota(){
         int contadorX = 0;
         for(int i=0; i<TableroDelJugador.length; i++){

@@ -7,6 +7,7 @@ public class JuegoBatallaNaval{
     static Scanner entrada = new Scanner(System.in);
 
     //Método de inicio
+    /* Es un método que se encarga de settear los nombres de los jugadores com inicio*/
     public static void nombreDeLosJugadores(){
         System.out.println("Bienvenido a Batalla Naval, por favor digite el nombre de los participantes");
         System.out.println("Jugador 1:");
@@ -16,11 +17,13 @@ public class JuegoBatallaNaval{
     }
 
     //Prejuego
+    /* Este método se encarga de llamar al método moverBarcos para asignar los barcos dentro de los rangos del tablero, 
+     * antes de empezar el juego. */
     public static void fasePrevia(){
         //Jugador 1
         System.out.println(jugador1.getNombre() + " ingrese la posición de sus barcos");
         int barcosColocadosJ1 = 0;
-        while (barcosColocadosJ1 < 3) {
+        while(barcosColocadosJ1<3){
             System.out.println("Barco #" + (barcosColocadosJ1 + 1));
             System.out.print("Digite la Columna: ");
             int fila = entrada.nextInt();
@@ -40,7 +43,7 @@ public class JuegoBatallaNaval{
         //Jugador 2
         System.out.println(jugador2.getNombre() + " ingrese la posición de sus barcos");
         int barcosColocadosJ2 = 0;
-        while (barcosColocadosJ2 < 3) {
+        while(barcosColocadosJ2<3){
             System.out.println("Barco #" + (barcosColocadosJ2 + 1));
             System.out.print("Digite la Columna: ");
             int fila = entrada.nextInt();
@@ -48,7 +51,6 @@ public class JuegoBatallaNaval{
             int columna = entrada.nextInt();
 
             boolean exito = jugador2.moverBarco(columna, fila);
-
 
             if(exito){
                 barcosColocadosJ2++;
@@ -60,6 +62,9 @@ public class JuegoBatallaNaval{
     }
 
     //Juego
+    /*Este método se divide en dos métodos exactamente iguales que se distinguen en turnos para cada jugador, es un bucle que termina hasta que alguien
+     * pierda. En cada turno, le pide al jugador del turno las coordenadas por atacar, las verifica, si se digitan coordenadas erroneas, rehace la solicitud,
+     * si son correctas, verifica mediante ataque la posición atacada y la registra con un simbolo distinguido ('X' si habia un barco, '0' si fue al agua)*/
     public static void juegoBatallaNaval(){
         System.out.println("Empieza " + jugador1.getNombre());
         while(!jugador1.getTableroPropio().derrota() && !jugador2.getTableroPropio().derrota()){
