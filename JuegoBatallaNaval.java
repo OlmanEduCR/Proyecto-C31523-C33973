@@ -63,41 +63,11 @@ public class JuegoBatallaNaval{
     public static void juegoBatallaNaval(){
         System.out.println("Empieza " + jugador1.getNombre());
         while(!jugador1.getTableroPropio().derrota() && !jugador2.getTableroPropio().derrota()){
-            boolean acierto;
+            boolean acierto = false;
             // Turno del Jugador 1
-            do{
-                System.out.println(jugador1.getNombre() + ", ingrese las coordenadas para atacar:");
-                System.out.print("Digite la columna que desea atacar: ");
-                int colAtaque = entrada.nextInt();
-                System.out.print("Digite la fila que desea atacar: ");
-                int filaAtaque = entrada.nextInt();
-
-                acierto = jugador2.ataque(colAtaque, filaAtaque);
-                System.out.println(jugador1.getNombre() + " ataca a " + jugador2.getNombre());
-
-                if (acierto) {
-                jugador2.getTableroPropio().mostrarTablero();
-                } else {
-                System.out.println("Coordenadas fuera del mapa o ya atacadas. Intente de nuevo.");
-                }
-
-                if (jugador2.verificarAtaque(colAtaque, filaAtaque)) {
-                System.out.println("[ATAQUE] ¡Casilla " + colAtaque + "/" + filaAtaque + " era un barco!");
-                } else {
-                System.out.println("[ATAQUE] Casilla " + colAtaque + "/" + filaAtaque + " no hay impacto");
-                }
-
-            } while (acierto);
-
-            if (jugador2.getTableroPropio().derrota()){
-            System.out.println(jugador2.getNombre() + " ha perdido todos sus barcos. ¡" + jugador1.getNombre() + " gana!");
-            break;
-        }
-            
-
-            // Turno del Jugador 2
-                do {
-                    System.out.println(jugador1.getNombre() + ", ingrese las coordenadas para atacar:");
+            while(acierto == false){
+                try{
+                    System.out.println(jugador1.getNombre() + ", ingrese las coordenadas para atacar: ");
                     System.out.print("Digite la columna que desea atacar: ");
                     int colAtaque = entrada.nextInt();
                     System.out.print("Digite la fila que desea atacar: ");
@@ -106,23 +76,60 @@ public class JuegoBatallaNaval{
                     acierto = jugador2.ataque(colAtaque, filaAtaque);
                     System.out.println(jugador1.getNombre() + " ataca a " + jugador2.getNombre());
 
-                    if (acierto) {
+                    if(acierto == true){
                     jugador2.getTableroPropio().mostrarTablero();
-                    } else {
-                    System.out.println("Coordenadas fuera del mapa o ya atacadas. Intente de nuevo.");
+                    } else{
+                    System.out.println("Coordenadas fuera del mapa o ya atacadas. Penalización de turno");
+                    break;
                     }
 
-                    if (jugador2.verificarAtaque(colAtaque, filaAtaque)) {
+                    if (jugador2.verificarAtaque(colAtaque, filaAtaque) == true) {
                     System.out.println("[ATAQUE] ¡Casilla " + colAtaque + "/" + filaAtaque + " era un barco!");
-                    } else {
+                    } else{
                     System.out.println("[ATAQUE] Casilla " + colAtaque + "/" + filaAtaque + " no hay impacto");
                     }
+                }catch(ArrayIndexOutOfBoundsException ataqueFallido){
+                    System.out.println("Ingrese una coordenada válida.");
+                } 
 
-                } while (acierto);
+                if(jugador2.getTableroPropio().derrota()){
+                    System.out.println(jugador2.getNombre() + " ha perdido todos sus barcos. ¡" + jugador1.getNombre() + " gana!");
+                    break;
+                }
+            }
 
-                if (jugador2.getTableroPropio().derrota()){
-                System.out.println(jugador2.getNombre() + " ha perdido todos sus barcos. ¡" + jugador1.getNombre() + " gana!");
-                break;
+            // Turno del Jugador 2
+            while(acierto == false){
+                try{
+                    System.out.println(jugador2.getNombre() + ", ingrese las coordenadas para atacar: ");
+                    System.out.print("Digite la columna que desea atacar: ");
+                    int colAtaque = entrada.nextInt();
+                    System.out.print("Digite la fila que desea atacar: ");
+                    int filaAtaque = entrada.nextInt();
+
+                    acierto = jugador1.ataque(colAtaque, filaAtaque);
+                    System.out.println(jugador2.getNombre() + " ataca a " + jugador1.getNombre());
+
+                    if(acierto == true){
+                    jugador1.getTableroPropio().mostrarTablero();
+                    } else{
+                    System.out.println("Coordenadas fuera del mapa o ya atacadas. Penalización de turno");
+                    break;
+                    }
+
+                    if (jugador1.verificarAtaque(colAtaque, filaAtaque) == true) {
+                    System.out.println("[ATAQUE] ¡Casilla " + colAtaque + "/" + filaAtaque + " era un barco!");
+                    } else{
+                    System.out.println("[ATAQUE] Casilla " + colAtaque + "/" + filaAtaque + " no hay impacto");
+                    }
+                }catch(ArrayIndexOutOfBoundsException ataqueFallido){
+                    System.out.println("Ingrese una coordenada válida.");
+                } 
+
+                if(jugador1.getTableroPropio().derrota()){
+                    System.out.println(jugador1.getNombre() + " ha perdido todos sus barcos. ¡" + jugador2.getNombre() + " gana!");
+                    break;
+                }
             }
         }
     }

@@ -89,17 +89,17 @@ public class Jugador{
     }
     public boolean ataque(int coorColumna, int coorFila){
         Barco[][] tablero = tableropropio.getTableroDelJugador();
-        if (coorColumna < 1 || coorFila < 1 || coorColumna > tablero.length || coorFila > tablero[0].length) {
-            return false;
-        }
         int fila = coorFila-1;
         int columna = coorColumna-1;
         Barco casillaTablero = tablero[fila][columna];
-
+        if(columna < 0 || fila < 0 || columna > tablero.length || fila > tablero[0].length || casillaTablero.getBarco() == 'X' || casillaTablero.getBarco() == '0'){
+            return false;
+        }
+        
         if(casillaTablero.getBarco() == '*'){
             casillaTablero.setBarco('0');
             casillaTablero.setEstado(false);
-        } else{
+        }else{
             if(casillaTablero.getBarco() != '*' && casillaTablero.getBarco() != '0'){
                 casillaTablero.setBarco('X');
                 casillaTablero.setEstado(false);
