@@ -40,10 +40,6 @@ public class Ahorcado {
         Jugador jugadorOponente = getJugadorOponente();
         String resultado = jugadorOponente.verificarLetra(letra);
 
-        // Verificar si termino el juego
-        if (resultado.toLowerCase().contains("incorrecta")) {
-            jugadorActual.restarIntentos();
-        }
         if(jugadorOponente.haGanado()){
             finDelJuego = true;
             return resultado + " El jugador " + turno + " gano.";

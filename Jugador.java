@@ -64,7 +64,7 @@ public class Jugador{
         return new String(letrasAdivinadas);
     }
 
-    //Métodos
+    //Metodos
     //Batlla Naval
     /*moverBarco la finalidad es determinar la posición en donde se le asignará un nuevo barco, si todo el proceso se completa, el método devolverá true,
     false en caso contrario*/
