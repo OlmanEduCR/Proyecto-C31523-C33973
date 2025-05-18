@@ -17,7 +17,7 @@ public class Jugador{
         this.contadorBarcos = 0;
     }
 
-    public Jugador(String palabra) {
+    public Jugador(String palabra){
         this.palabra = palabra.toLowerCase();
         this.palabraArray = this.palabra.toCharArray();
         this.letrasAdivinadas = new char[palabra.length()];
@@ -52,24 +52,26 @@ public class Jugador{
         return contadorBarcos;
     }
 
-    public String getPalabra() {
+    public String getPalabra(){
         return palabra;
     }
 
-    public int getIntentos() {
+    public int getIntentos(){
         return intentos;
     }
 
-    public String getLetrasAdivinadas() {
+    public String getLetrasAdivinadas(){
         return new String(letrasAdivinadas);
     }
 
     //Métodos
     //Batlla Naval
-    public boolean moverBarco(int coorColumna, int coorFila) {
+    /*moverBarco la finalidad es determinar la posición en donde se le asignará un nuevo barco, si todo el proceso se completa, el método devolverá true,
+    false en caso contrario*/
+    public boolean moverBarco(int coorColumna, int coorFila){
         Barco[][] tablero = tableropropio.getTableroDelJugador();
         char numBarco = (char)('1' + contadorBarcos);
-        if (coorColumna < 1 || coorFila < 1 || coorColumna > tablero.length || coorFila > tablero[0].length) {
+        if(coorColumna < 1 || coorFila < 1 || coorColumna > tablero.length || coorFila > tablero[0].length){
             return false;
         }
         
@@ -87,6 +89,9 @@ public class Jugador{
         }
         return false;           
     }
+
+    /*ataque es bastante intuitivo, setea en la posición determinada por los parámetros un estado de false (Hundido o Ataque fallido, dependiendo de
+    que impacte) y retorna true si toda la acción fue concretada con éxito*/
     public boolean ataque(int coorColumna, int coorFila){
         Barco[][] tablero = tableropropio.getTableroDelJugador();
         int fila = coorFila-1;
@@ -112,38 +117,38 @@ public class Jugador{
         Barco casillaTablero = tablero[(coorFila-1)][(coorColumna-1)];
         if(casillaTablero.getBarco() == 'X'){
             return true;
-        } else {
+        } else{
             if(casillaTablero.getBarco() == '0'){
                 return false;
             }
         }return false;
     }
 
-    public String verificarLetra(char letra) {
+    public String verificarLetra(char letra){
         letra = Character.toLowerCase(letra);
-        if (!Character.isLetter(letra)) {
+        if(!Character.isLetter(letra)) {
             return "Ingrese una letra válida.";
         }
 
         boolean letraEncontrada = false;
 
-        for (int i = 0; i < palabraArray.length; i++) {
-            if (palabraArray[i] == letra && !letrasVerificadas[i]) {
+        for(int i = 0; i < palabraArray.length; i++){
+            if (palabraArray[i] == letra && !letrasVerificadas[i]){
                 letrasAdivinadas[i] = letra;
                 letrasVerificadas[i] = true;
                 letraEncontrada = true;
             }
         }
 
-        if (!letraEncontrada) {
+        if(!letraEncontrada){
             intentos--;
             if (intentos <= 0) {
                 return "Te quedaste sin intentos.";
             }
             return "Letra incorrecta. Te quedan " + intentos + " intentos.";
-        } else {
+        } else{
             // Verificar si ganó
-            for (boolean b : letrasVerificadas) {
+            for (boolean b : letrasVerificadas){
                 if (!b) {
                     return "Letra correcta.";
                 }
@@ -156,12 +161,12 @@ public class Jugador{
         intentos--;
     }
 
-    public boolean estaSinIntentos() {
+    public boolean estaSinIntentos(){
         return intentos <= 0;
     }
 
-    public boolean haGanado() {
-        for (boolean b : letrasVerificadas) {
+    public boolean haGanado(){
+        for (boolean b : letrasVerificadas){
             if (!b) return false;
         }
         return true;
